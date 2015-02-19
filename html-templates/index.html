@@ -1,0 +1,107 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  
+  <style type="text/css">
+    table {
+	    font-family: verdana,arial,sans-serif;
+  	  font-size:11px;
+	    color:#333333;
+	    border-width: 1px;
+	    border-color: #999999;
+	    border-collapse: collapse;
+    }
+    table th {
+	    background-color:#c3dde0;
+	    border-width: 1px;
+	    padding: 8px;
+	    border-style: solid;
+	    border-color: #a9c6c9;
+    }
+    table tr {
+	    background-color:#d4e3e5;
+    }
+    table tr:hover {
+	    background-color:#F4F3F5;
+    }
+    table td {
+	    border-width: 1px;
+	    padding: 8px;
+	    border-style: solid;
+	    border-color: #a9c6c9;
+    }
+  </style>
+</head>
+<body>
+  
+  <table>
+    <tr>
+      <th>Variable</th>
+      <th>
+        <a href="#" onclick="showMin()" class="max">Value (max)</a>
+        <a href="#" onclick="showMax()" class="min">Value (min)</a>
+      </th>
+      <th>Average</th>
+      <th>Website</th>
+    </tr>
+
+    {#metrics}
+    
+    <tr>
+      <td>
+        {name}
+      </td>
+      <td>
+        <span class="max">{max.value}</span>
+        <span class="min">{min.value}</span>
+      </td>
+      <td>
+        <span class="max">
+          {^max.average} - {/max.average}
+          {max.average}
+        </span>
+        <span class="min">
+          {^min.average} - {/min.average}
+          {min.average}
+        </span>
+      </td>
+      <td>
+        <span class="max">{max.url}</span>
+        <span class="min">{min.url}</span>
+      </td>
+    </tr>
+    {/metrics}
+    
+
+  </table>
+
+  <script type="text/javascript">
+
+   function showMin() {
+      var maxElements = document.querySelectorAll('.max');
+      Array.prototype.forEach.call(maxElements, function(el, i){
+        el.style.display = 'none';
+      });
+      var minElements = document.querySelectorAll('.min');
+      Array.prototype.forEach.call(minElements, function(el, i){
+        el.style.display = '';
+      });
+    }
+
+    function showMax() {
+      var maxElements = document.querySelectorAll('.max');
+      Array.prototype.forEach.call(maxElements, function(el){
+        el.style.display = '';
+      });
+      var minElements = document.querySelectorAll('.min');
+      Array.prototype.forEach.call(minElements, function(el){
+        el.style.display = 'none';
+      });
+    }
+    showMax();
+    
+  </script>
+</body>
