@@ -5,6 +5,7 @@ Report visualization for website performance metrics (from phamtomas)
 # Quickstart
 
 ```
+  npm install
   make
 ```
 
