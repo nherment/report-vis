@@ -1,0 +1,69 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  
+  <style type="text/css">
+    table {
+	    font-family: verdana,arial,sans-serif;
+  	  font-size:11px;
+	    color:#333333;
+	    border-width: 1px;
+	    border-color: #999999;
+	    border-collapse: collapse;
+    }
+    table th {
+	    background-color:#c3dde0;
+	    border-width: 1px;
+	    padding: 8px;
+	    border-style: solid;
+	    border-color: #a9c6c9;
+    }
+    table tr {
+	    background-color:#d4e3e5;
+    }
+    table tr:hover {
+	    background-color:#F4F3F5;
+    }
+    table td {
+	    border-width: 1px;
+	    padding: 8px;
+	    border-style: solid;
+	    border-color: #a9c6c9;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="reportPlaceHolder"></div>
+  
+  <script type="text/javascript" src="/js/vendor/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="/js/vendor/dust-full.min.js"></script>
+  <script type="text/javascript" src="/js/vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="/js/ReportGenerator.js"></script>
+  <script type="text/javascript">
+
+   $(document).ready(function() {
+     $.get('/api/reports', function(performanceReports) {
+       $.ReportGenerator.run(performanceReports, function(err, UIFriendlyReports) {
+         render(UIFriendlyReports);
+       });
+     });
+   });
+
+   function render(reports) {
+     $.get('/report.dust', function(reportTemplate) {
+       
+       var compiled = dust.compile(reportTemplate, 'report')
+       dust.loadSource(compiled)
+       dust.render('report', {metrics: reports}, function(err, out) {
+         $('#reportPlaceHolder').html(err || out);
+       });
+     });
+   }
+    
+  </script>
+</body>
+</html>

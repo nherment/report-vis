@@ -10,9 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "dustjs-linkedin": "^2.5.1",
+    "express": "^4.11.2",
     "lodash": "^3.2.0",
+    "node-dev": "^2.6.1",
     "optimist": "^0.6.1",
     "phantomas": "^1.9.0",
+    "serve-static": "^1.9.1",
     "wrench": "^1.5.8"
   }
 }

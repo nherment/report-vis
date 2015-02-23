@@ -1,0 +1,68 @@
+
+  <table>
+    <tr>
+      <th>Variable</th>
+      <th>
+        <a href="#" onclick="showMin()" class="max">Value (max)</a>
+        <a href="#" onclick="showMax()" class="min">Value (min)</a>
+      </th>
+      <th>Average</th>
+      <th>Website</th>
+    </tr>
+
+    {#metrics}
+    
+    <tr>
+      <td>
+        {name}
+      </td>
+      <td>
+        <span class="max">{max.value}</span>
+        <span class="min">{min.value}</span>
+      </td>
+      <td>
+        <span class="max">
+          {^max.average} - {/max.average}
+          {max.average}
+        </span>
+        <span class="min">
+          {^min.average} - {/min.average}
+          {min.average}
+        </span>
+      </td>
+      <td>
+        <span class="max">{max.url}</span>
+        <span class="min">{min.url}</span>
+      </td>
+    </tr>
+    {/metrics}
+    
+
+  </table>
+  
+  <script type="text/javascript">
+   function showMin() {
+      var maxElements = document.querySelectorAll('.max');
+      Array.prototype.forEach.call(maxElements, function(el, i){
+        el.style.display = 'none';
+      });
+      var minElements = document.querySelectorAll('.min');
+      Array.prototype.forEach.call(minElements, function(el, i){
+        el.style.display = '';
+      });
+    }
+
+    function showMax() {
+      var maxElements = document.querySelectorAll('.max');
+      Array.prototype.forEach.call(maxElements, function(el){
+        el.style.display = '';
+      });
+      var minElements = document.querySelectorAll('.min');
+      Array.prototype.forEach.call(minElements, function(el){
+        el.style.display = 'none';
+      });
+    }
+    
+    showMax();
+    
+  </script>
